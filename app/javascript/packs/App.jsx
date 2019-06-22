@@ -54,7 +54,7 @@ const App = () => {
               </Menu.Item>
             </Menu>
           </Header>
-          <Content style={{ padding: '0 50px' }}>
+          <Content style={{ padding: '0 50px', minHeight: 'calc(100vh - 133px)' }}>
             {routes.map((route, index) => (
               <Route
                 key={index}
