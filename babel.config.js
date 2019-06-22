@@ -44,6 +44,13 @@ module.exports = function(api) {
       ]
     ].filter(Boolean),
     plugins: [
+      [
+        'import',
+        {
+          'libraryName': 'antd',
+          'style': true,
+        }
+      ],
       require('babel-plugin-macros'),
       require('@babel/plugin-syntax-dynamic-import').default,
       isTestEnv && require('babel-plugin-dynamic-import-node'),
