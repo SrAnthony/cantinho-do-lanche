@@ -10,6 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2019_06_22_170913) do
 
+  create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.date "birthday"
+    t.string "email"
+    t.text "observation"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "product_id", null: false
+    t.string "table"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["product_id"], name: "index_orders_on_product_id"
+  end
+
+  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.integer "price_cents"
+    t.integer "stock"
+    t.integer "category"
+    t.integer "points_earn"
+    t.integer "points_needed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.integer "price_cents"
+    t.integer "quantity"
+    t.text "observation"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_purchases_on_product_id"
+  end
+
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "products"
+  add_foreign_key "purchases", "products"
 end
