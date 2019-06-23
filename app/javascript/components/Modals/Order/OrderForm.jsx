@@ -1,8 +1,9 @@
 import React from 'react'
 import { Form, Row, Col, Input, Button } from 'antd'
 import ProductsSelector from './ProductsSelector'
+import CustomerInput from 'Inputs/Customer'
 
-export default ({ form }) => {
+export default ({ form, submit }) => {
   const { getFieldDecorator } = form
 
   return (
@@ -13,11 +14,13 @@ export default ({ form }) => {
 
       <Row gutter={16}>
         <Col span={8}>
-          {getFieldDecorator('client_id', {
-            rules: [{ required: true, message: 'Informe um cliente' }]
-          })(
-            <Input placeholder="Cliente" />
-          )}
+          <Form.Item>
+            {getFieldDecorator('customer_id', {
+              rules: [{ required: true, message: 'Informe um cliente' }]
+            })(
+              <CustomerInput />
+            )}
+          </Form.Item>
         </Col>
         <Col span={5}>
           {getFieldDecorator('table')(
@@ -25,7 +28,7 @@ export default ({ form }) => {
           )}
         </Col>
         <Col span={11} style={{ textAlign: 'right' }}>
-          <Button type="primary">
+          <Button type="primary" onClick={submit}>
             Salvar
           </Button>
         </Col>

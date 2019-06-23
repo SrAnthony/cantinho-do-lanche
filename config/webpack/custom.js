@@ -6,6 +6,7 @@ module.exports = {
       Components: path.resolve(__dirname, '..', '..', 'app/javascript/components'),
       Pages: path.resolve(__dirname, '..', '..', 'app/javascript/components/Pages'),
       Modals: path.resolve(__dirname, '..', '..', 'app/javascript/components/Modals'),
+      Inputs: path.resolve(__dirname, '..', '..', 'app/javascript/components/Inputs'),
       Images: path.resolve(__dirname, '..', '..', 'app/javascript/images'),
     }
   },
