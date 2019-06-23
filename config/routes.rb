@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'customer/:id.json', to: 'customers#show'
   get 'products.json', to: 'products#index'
   get 'product/:id.json', to: 'products#show'
+  get 'purchases.json', to: 'purchases#index'
+  get 'purchase/:id.json', to: 'purchases#show'
 
   get '*path', to: 'orders#index'
 
