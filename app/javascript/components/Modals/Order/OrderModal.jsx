@@ -6,7 +6,7 @@ import './styles.sass'
 
 class OrderModal extends React.Component {
   state = {
-    visible: true,
+    visible: false,
     loading: false,
   }
 
@@ -15,6 +15,7 @@ class OrderModal extends React.Component {
   }
 
   close = () => {
+    this.props.form.resetFields()
     this.setState({ visible: false, loading: false })
   }
 
@@ -42,6 +43,7 @@ class OrderModal extends React.Component {
         confirmLoading={loading}
         width={800}
         footer={null}
+        onCancel={this.close}
         className="order-modal"
       >
         <OrderForm

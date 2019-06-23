@@ -14,7 +14,7 @@ export default () => {
         <h1>Pedidos</h1>
       </div>
       <div className="content-actions">
-        <Button type="primary">
+        <Button type="primary" onClick={() => orderModalRef.current.open()}>
           Novo pedido
         </Button>
       </div>

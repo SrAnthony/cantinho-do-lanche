@@ -7,6 +7,8 @@ module.exports = {
       Pages: path.resolve(__dirname, '..', '..', 'app/javascript/components/Pages'),
       Modals: path.resolve(__dirname, '..', '..', 'app/javascript/components/Modals'),
       Inputs: path.resolve(__dirname, '..', '..', 'app/javascript/components/Inputs'),
+      Drawers: path.resolve(__dirname, '..', '..', 'app/javascript/components/Drawers'),
+      Utils: path.resolve(__dirname, '..', '..', 'app/javascript/components/Utils'),
       Images: path.resolve(__dirname, '..', '..', 'app/javascript/images'),
     }
   },

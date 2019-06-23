@@ -1,13 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import { Layout, Menu, Breadcrumb, LocaleProvider } from 'antd'
+import { Layout, Menu, LocaleProvider } from 'antd'
 import ptBR from 'antd/lib/locale-provider/pt_BR'
+import axios from 'axios'
 import routes from 'Components/routes'
 
 import 'Components/General.sass'
 
 const { Header, Content, Footer } = Layout
+
+axios.defaults.headers.common['X-CSRF-Token'] = document.querySelector('meta[name=csrf-token]').content
 
 const App = () => {
 
@@ -19,7 +22,7 @@ const App = () => {
             <Menu
               theme="dark"
               mode="horizontal"
-              defaultSelectedKeys={['/']}
+              defaultSelectedKeys={[window.location.pathname]}
               style={{ lineHeight: '64px' }}
             >
               <Menu.Item key="/">
