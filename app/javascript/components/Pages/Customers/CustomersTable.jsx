@@ -1,8 +1,8 @@
 import React from 'react'
-import { Table, Divider, Icon } from 'antd'
+import { Table, Divider, Icon, Popconfirm } from 'antd'
 import moment from 'Utils/moment'
 
-export default ({ data, openDrawer }) => {
+export default ({ data, openDrawer, destroyCustomer }) => {
   const columns = [{
     title: 'Nome',
     dataIndex: 'name',
@@ -30,9 +30,15 @@ export default ({ data, openDrawer }) => {
           <Icon type="edit" />
         </a>
         <Divider type="vertical" />
-        <a onClick={() => {}}>
-          <Icon type="delete" />
-        </a>
+        <Popconfirm
+          title="Tem certeza?"
+          onConfirm={() => destroyCustomer(id)}
+          okText="Sim"
+          cancelText="Não"
+          placement="left"
+        >
+          <a><Icon type="delete" /></a>
+        </Popconfirm>
       </div>
     )
   }]
