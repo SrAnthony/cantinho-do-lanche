@@ -1,5 +1,6 @@
 import React from 'react'
 import { Modal, Form, message } from 'antd'
+import axios from 'axios'
 import OrderForm from './OrderForm'
 
 import './styles.sass'
@@ -26,9 +27,23 @@ class OrderModal extends React.Component {
       if (values.products.length == 0)
         return message.info('Você deve selecionar ao menos um produto')
 
-      message.success('Pedido criado com sucesso!')
+      this.setState({ loading: true })
 
-      console.log({ values })
+      Promise.all(values.products.map(product => {
+        const data = {
+          table: values.table,
+          customer_id: values.customer_id,
+          product_id: product,
+        }
+        return axios.post('/orders', { order: data })
+      }))
+        .then(() => {
+          message.success('Pedido criado com sucesso!')
+          this.close()
+          this.props.onUpdate()
+        })
+        .catch(() => message.error('Não foi possível criar o pedido'))
+        .finally(() => this.setState({ loading: false }))
     })
   }
 
@@ -40,7 +55,6 @@ class OrderModal extends React.Component {
       <Modal
         title="Novo pedido"
         visible={visible}
-        confirmLoading={loading}
         width={800}
         footer={null}
         onCancel={this.close}
@@ -49,6 +63,7 @@ class OrderModal extends React.Component {
         <OrderForm
           form={form}
           submit={this.submit}
+          loading={loading}
         />
       </Modal>
     )

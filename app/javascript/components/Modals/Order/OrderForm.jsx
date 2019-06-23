@@ -3,7 +3,7 @@ import { Form, Row, Col, Input, Button } from 'antd'
 import ProductsSelector from './ProductsSelector'
 import CustomerInput from 'Inputs/Customer'
 
-export default ({ form, submit }) => {
+export default ({ form, submit, loading }) => {
   const { getFieldDecorator } = form
 
   return (
@@ -28,7 +28,7 @@ export default ({ form, submit }) => {
           )}
         </Col>
         <Col span={11} style={{ textAlign: 'right' }}>
-          <Button type="primary" onClick={submit}>
+          <Button type="primary" onClick={submit} loading={loading}>
             Salvar
           </Button>
         </Col>

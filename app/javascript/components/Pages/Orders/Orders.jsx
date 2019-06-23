@@ -1,5 +1,6 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Button } from 'antd'
+import axios from 'axios'
 import OrdersList from './OrdersList'
 import OrderModal from 'Modals/Order'
 
@@ -7,6 +8,14 @@ import './styles.sass'
 
 export default () => {
   const orderModalRef = useRef()
+  const [orders, setOrders] = useState([])
+
+  const fetchOrders = () => {
+    axios.get('/orders.json')
+      .then(result => setOrders(result.data))
+  }
+
+  useEffect(fetchOrders, [])
 
   return (
     <div className="content-wrapper orders">
@@ -20,10 +29,13 @@ export default () => {
       </div>
 
       <section className="content-section">
-        <OrdersList />
+        <OrdersList orders={orders} />
       </section>
 
-      <OrderModal wrappedComponentRef={orderModalRef} />
+      <OrderModal
+        wrappedComponentRef={orderModalRef}
+        onUpdate={fetchOrders}
+      />
     </div>
   )
 }

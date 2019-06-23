@@ -2,7 +2,7 @@ import React from 'react'
 
 import x_egg from 'Images/x/x-egg.jpg'
 
-export default () => {
+export default ({ order }) => {
 
   return (
     <li>
@@ -11,10 +11,10 @@ export default () => {
           <img src={x_egg} />
         </div>
         <h4 className="title">
-          X-Egg
+          {order.product.name}
         </h4>
         <h4 className="client">
-          Luana Silva
+          {order.customer.name}
         </h4>
         <div className="progress">
           Em andamento

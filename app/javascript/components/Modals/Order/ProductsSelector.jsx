@@ -1,52 +1,66 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Badge } from 'antd'
+import axios from 'axios'
 import x_egg from 'Images/x/x-egg.jpg'
 
 export default ({ form }) => {
-  const products = form.getFieldValue('products') || []
+  const [products, setProducts] = useState([])
 
-  const handleProductClick = product => {
-    form.setFieldsValue({ products: [...products, product] })
+  const fetchProducts = () => {
+    axios.get('/products.json')
+      .then(result => setProducts(result.data))
   }
 
-  const handleRemoveClick = product => {
-    form.setFieldsValue({ products: products.filter(pr => pr != product) })
+  useEffect(fetchProducts, [])
+
+  const selected_products = form.getFieldValue('products') || []
+
+  const handleProductClick = id => {
+    form.setFieldsValue({ products: [...selected_products, id] })
+  }
+
+  const handleRemoveClick = id => {
+    form.setFieldsValue({ products: selected_products.filter(selected => selected != id) })
   }
 
   return (
     <div className="products-selector">
       <Scrollbars autoHide style={{ width: 776, height: 220 }}>
         <div className="list">
-          {[0,1,2,3,4,5,6,7,8,10].map(n => (
-            <Badge
-              key={n}
-              count={products.reduce((acc, curr) => curr == n ? acc + 1 : acc, 0)}
-              offset={[-15, 15]}
-              overflowCount={999}
-            >
-              <div
-                className={`product-item ${products.includes(n) && 'selected'}`}
-                onClick={() => handleProductClick(n)}
+          {products.map(product => {
+            const is_selected = selected_products.includes(product.id)
+
+            return (
+              <Badge
+                key={product.id}
+                count={selected_products.reduce((acc, curr) => curr == product.id ? acc + 1 : acc, 0)}
+                offset={[-15, 15]}
+                overflowCount={999}
               >
-                <div className="image">
-                  <img src={x_egg} />
+                <div
+                  className={`product-item ${is_selected && 'selected'}`}
+                  onClick={() => handleProductClick(product.id)}
+                >
+                  <div className="image">
+                    <img src={x_egg} />
+                  </div>
+                  <div className="title">
+                    {product.name}
+                  </div>
+                  <div className="price">
+                    {product.price_cents}
+                  </div>
                 </div>
-                <div className="title">
-                  X-Egg
-                </div>
-                <div className="price">
-                  R$ 15,00
-                </div>
-              </div>
-              {
-                products.includes(n) &&
-                <div className="remove" onClick={() => handleRemoveClick(n)}>
-                  Remover
-                </div>
-              }
-            </Badge>
-          ))}
+                {
+                  is_selected &&
+                  <div className="remove" onClick={() => handleRemoveClick(product.id)}>
+                    Remover
+                  </div>
+                }
+              </Badge>
+            )
+          })}
         </div>
       </Scrollbars>
     </div>

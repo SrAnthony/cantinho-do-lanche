@@ -1,19 +1,19 @@
 import React from 'react'
 import OrderItem from './OrderItem'
 
-export default () => {
+export default ({ orders }) => {
 
   return (
     <ul className="orders-list">
-      <OrderItem />
-      <OrderItem />
-      <OrderItem />
-      <OrderItem />
-      <OrderItem />
-      <OrderItem />
-      <OrderItem />
-      <OrderItem />
-      <OrderItem />
+      {orders.map(order => (
+        <OrderItem key={order.id} order={order} />
+      ))}
+      {
+        orders.length == 0 &&
+        <li className="no-orders">
+          Não há pedidos
+        </li>
+      }
     </ul>
   )
 }
