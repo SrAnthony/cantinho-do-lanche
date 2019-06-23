@@ -35,5 +35,12 @@
         margin-bottom: 0
       .progress
         text-align: center
-        background: yellow
         cursor: pointer
+        &.waiting
+          background: #ffff61
+        &.in_progress
+          background: #9999ff
+        &.ready
+          background: #63d063
+        &.finished
+          background: #b1b1b1

@@ -8,7 +8,7 @@
 #  table       :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  status      :integer
+#  status      :integer          default("waiting")
 #
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

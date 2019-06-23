@@ -12,7 +12,7 @@ export default () => {
 
   const fetchOrders = () => {
     axios.get('/orders.json')
-      .then(result => setOrders(result.data))
+      .then(result => setOrders(result.data.reverse()))
   }
 
   useEffect(fetchOrders, [])
@@ -29,7 +29,7 @@ export default () => {
       </div>
 
       <section className="content-section">
-        <OrdersList orders={orders} />
+        <OrdersList orders={orders} fetchOrders={fetchOrders} />
       </section>
 
       <OrderModal
