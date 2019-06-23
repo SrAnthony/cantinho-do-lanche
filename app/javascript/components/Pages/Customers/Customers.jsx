@@ -4,8 +4,6 @@ import axios from 'axios'
 import CustomersTable from './CustomersTable'
 import CustomerDrawer from 'Drawers/Customer'
 
-import './styles.sass'
-
 export default () => {
   const [data, setData] = useState([])
 
