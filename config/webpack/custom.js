@@ -5,6 +5,7 @@ module.exports = {
     alias: {
       Components: path.resolve(__dirname, '..', '..', 'app/javascript/components'),
       Pages: path.resolve(__dirname, '..', '..', 'app/javascript/components/Pages'),
+      Modals: path.resolve(__dirname, '..', '..', 'app/javascript/components/Modals'),
       Images: path.resolve(__dirname, '..', '..', 'app/javascript/images'),
     }
   },

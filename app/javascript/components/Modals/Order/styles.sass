@@ -1,0 +1,45 @@
+.order-modal
+  .products-selector
+    background: rgba(0, 0, 0, .03)
+    margin: -24px
+    margin-top: 15px
+    padding: 24px 0 24px 24px
+
+    .list
+      display: flex
+      overflow: visible
+
+      .remove
+        text-align: center
+        font-size: .8em
+        cursor: pointer
+
+    .product-item
+      min-width: 150px
+      min-height: 180px
+      border: .5px solid #eee
+      margin: 10px 15px
+      background: white
+      border-radius: 10px
+      box-shadow: 0 0.6rem 1rem -0.6rem #d5dae2
+      transition: box-shadow .1s ease-in-out
+      cursor: pointer
+      &:hover
+        box-shadow: 0 1rem 1.8rem -0.5rem #cbd1dc
+      &.selected, &.selected img
+        border: 1px solid #00A3C5
+
+      .image
+        display: flex
+        justify-content: center
+        img
+          width: 105%
+          border-radius: 10px
+      .title
+        font-size: 1.3em
+        text-align: center
+        margin-top: 15px
+      .price
+        text-align: center
+        margin-top: 5px
+        font-weight: bold
