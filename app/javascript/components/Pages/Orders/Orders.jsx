@@ -9,6 +9,7 @@ import './styles.sass'
 export default () => {
   const orderModalRef = useRef()
   const [orders, setOrders] = useState([])
+  const [showFinished, setShowFinished] = useState(false)
 
   const fetchOrders = () => {
     axios.get('/orders.json')
@@ -26,10 +27,17 @@ export default () => {
         <Button type="primary" onClick={() => orderModalRef.current.open()}>
           Novo pedido
         </Button>
+        <Button onClick={() => setShowFinished(!showFinished)}>
+          {showFinished ? 'Exibir não finalizados' : 'Exibir finalizados'}
+        </Button>
       </div>
 
       <section className="content-section">
-        <OrdersList orders={orders} fetchOrders={fetchOrders} />
+        <OrdersList
+          orders={orders}
+          fetchOrders={fetchOrders}
+          showFinished={showFinished}
+        />
       </section>
 
       <OrderModal

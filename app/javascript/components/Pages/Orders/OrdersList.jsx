@@ -1,15 +1,19 @@
 import React from 'react'
 import OrderItem from './OrderItem'
 
-export default ({ orders, fetchOrders }) => {
+export default ({ orders, fetchOrders, showFinished }) => {
+
+  const render_orders = showFinished
+    ? orders.filter(order => order.status == 'finished')
+    : orders.filter(order => order.status != 'finished')
 
   return (
     <ul className="orders-list">
-      {orders.map(order => (
+      {render_orders.map(order => (
         <OrderItem key={order.id} order={order} fetchOrders={fetchOrders} />
       ))}
       {
-        orders.length == 0 &&
+        render_orders.length == 0 &&
         <li className="no-orders">
           Não há pedidos
         </li>
