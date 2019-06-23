@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import { Select } from 'antd'
 
 const { Option } = Select
 
 export default props => {
-  const clients = [{
-    id: 1, name: 'Anthony Nadaletti',
-  }, {
-    id: 2, name: 'Barbara Pegoraro',
-  }, {
-    id: 3, name: 'Augusto Araujo',
-  }]
+  const [data, setData] = useState([])
+
+  const fetchCustomers = () => {
+    axios.get('/customers.json')
+      .then(result => setData(result.data))
+  }
+
+  useEffect(fetchCustomers, [])
 
   return (
     <Select
@@ -22,7 +24,7 @@ export default props => {
       }
       {...props}
     >
-      {clients.map(client => (
+      {data.map(client => (
         <Option key={client.id} value={client.id}>
           {client.name}
         </Option>
