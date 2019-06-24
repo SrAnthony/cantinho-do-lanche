@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: foods
+#
+#  id            :bigint           not null, primary key
+#  name          :string(255)
+#  price_cents   :integer
+#  category      :integer
+#  points_earn   :integer
+#  points_needed :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  price_cents: 1
+  category: 1
+  points_earn: 1
+  points_needed: 1
+
+two:
+  name: MyString
+  price_cents: 1
+  category: 1
+  points_earn: 1
+  points_needed: 1

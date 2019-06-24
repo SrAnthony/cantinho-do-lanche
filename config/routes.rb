@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :foods
   root 'orders#index'
 
   get 'customers.json', to: 'customers#index'
