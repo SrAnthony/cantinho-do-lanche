@@ -1,6 +1,7 @@
 import React from 'react'
-import { Form, Input, Row, Col } from 'antd'
+import { Form, Input, InputNumber, Row, Col } from 'antd'
 import ProductInput from 'Inputs/Product'
+import { formatCurrency, numberParser } from 'Utils/formatters'
 
 export default ({ form }) => {
   const { getFieldDecorator, getFieldValue } = form
@@ -26,7 +27,11 @@ export default ({ form }) => {
             {getFieldDecorator('price_cents', {
               rules: [{ required: true, message: 'Preço unit é obrigatório' }],
             })(
-              <Input placeholder="Informe o preço unit" />
+              <InputNumber
+                formatter={formatCurrency}
+                parser={numberParser}
+                style={{ width: '100%' }}
+              />
             )}
           </Form.Item>
         </Col>
@@ -34,18 +39,27 @@ export default ({ form }) => {
           <Form.Item label="Quantidade">
             {getFieldDecorator('quantity', {
               rules: [
-                { required: true, message: 'Quantidade é obrigatória' },
-                { range: { min: 1 }, message: 'Deve ser maior que 0' }
+                { required: true, message: 'Quantidade é obrigatória' }
               ],
               initialValue: 0,
             })(
-              <Input placeholder="Informe a quantidade" />
+              <InputNumber
+                placeholder="Informe a quantidade"
+                min={1}
+                style={{ width: '100%' }}
+              />
             )}
           </Form.Item>
         </Col>
         <Col span={12}>
           <Form.Item label="Valor Total">
-            <Input value={total_value} disabled />
+            <InputNumber
+              value={total_value}
+              formatter={formatCurrency}
+              parser={numberParser}
+              style={{ width: '100%' }}
+              disabled
+            />
           </Form.Item>
         </Col>
         <Col span={24}>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table, Divider, Icon, Popconfirm } from 'antd'
+import { formatCurrency } from 'Utils/formatters'
 
 export default ({ data, openDrawer, destroyFood }) => {
   const columns = [{
@@ -11,6 +12,7 @@ export default ({ data, openDrawer, destroyFood }) => {
   }, {
     title: 'Preço',
     dataIndex: 'price_cents',
+    render: price => formatCurrency(price),
   }, {
     title: 'Ações',
     dataIndex: 'id',

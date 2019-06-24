@@ -1,5 +1,6 @@
 import React from 'react'
-import { Form, Input, Row, Col } from 'antd'
+import { Form, Input, InputNumber, Row, Col } from 'antd'
+import { formatCurrency, numberParser } from 'Utils/formatters'
 
 export default ({ form }) => {
   const { getFieldDecorator } = form
@@ -23,7 +24,11 @@ export default ({ form }) => {
             {getFieldDecorator('price_cents', {
               rules: [{ required: true, message: 'Preço é obrigatório' }]
             })(
-              <Input placeholder="Informe o preço" />
+              <InputNumber
+                formatter={formatCurrency}
+                parser={numberParser}
+                style={{ width: '100%' }}
+              />
             )}
           </Form.Item>
         </Col>
