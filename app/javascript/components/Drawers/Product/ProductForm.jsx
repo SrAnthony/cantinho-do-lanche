@@ -42,13 +42,6 @@ export default ({ form }) => {
             )}
           </Form.Item>
         </Col>
-        <Col span={12}>
-          <Form.Item label="Categoria">
-            {getFieldDecorator('category')(
-              <Input placeholder="Informe a categoria" />
-            )}
-          </Form.Item>
-        </Col>
       </Row>
     </Form>
   )

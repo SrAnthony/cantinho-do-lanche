@@ -26,6 +26,7 @@ class FoodDrawer extends React.Component {
     this.setState({ editing: true })
     axios.get(`/food/${id}.json`)
       .then(result => {
+        console.log(result.data)
         this.props.form.setFieldsValue(result.data)
       })
   }
@@ -34,6 +35,9 @@ class FoodDrawer extends React.Component {
     this.props.form.validateFields((errors, values) => {
       if (errors) return
       this.setState({ loading: true })
+
+      values.foods_products_attributes = Object.values(values.foods_products_attributes)
+        .filter(product => !!product.product_id && !!product.quantity)
 
       this.state.editing ? this.update(values) : this.create(values)
     })

@@ -57,7 +57,7 @@ export default ({ order, fetchOrders }) => {
           <img src={x_egg} />
         </div>
         <h4 className="title">
-          {order.product.name}
+          {order.food.name}
         </h4>
         <h4 className="client">
           {order.customer.name}
@@ -67,6 +67,9 @@ export default ({ order, fetchOrders }) => {
             {status_name(order.status)}
           </div>
         </Dropdown>
+        <div className="table-number">
+          {order.table && `Mesa ${order.table}`}
+        </div>
       </div>
     </li>
   )

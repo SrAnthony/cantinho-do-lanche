@@ -12,6 +12,7 @@
 #
 
 class Product < ApplicationRecord
-  has_many :orders
   has_many :purchases
+  has_many :foods_products
+  has_many :foods, through: :foods_products
 end

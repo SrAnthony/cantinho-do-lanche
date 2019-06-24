@@ -14,6 +14,14 @@ export default ({ data, openDrawer, destroyFood, loading }) => {
     dataIndex: 'price_cents',
     render: price => formatCurrency(price),
   }, {
+    title: 'Pontos ganhos',
+    dataIndex: 'points_earn',
+    align: 'center',
+  }, {
+    title: 'Pontos necessários',
+    dataIndex: 'points_needed',
+    align: 'center',
+  }, {
     title: 'Ações',
     dataIndex: 'id',
     fixed: 'right',

@@ -15,11 +15,13 @@ export default () => {
   }
 
   const destroyFood = id => {
+    setLoading(true)
     axios.delete(`/foods/${id}.json`)
       .then(() => {
         message.success('Lanche deletado com sucesso!')
         fetchFoods()
       })
+      .finally(() => setLoading(false))
   }
 
   useEffect(fetchFoods, [])

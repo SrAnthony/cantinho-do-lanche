@@ -25,6 +25,9 @@ class PurchasesController < ApplicationController
   # POST /purchases.json
   def create
     @purchase = Purchase.new(purchase_params)
+    product = Product.find(params[:purchase][:product_id])
+    product.stock += @purchase.quantity
+    product.save!
 
     respond_to do |format|
       if @purchase.save

@@ -8,7 +8,7 @@ export default ({ form, submit, loading }) => {
 
   return (
     <Form layout="vertical">
-      {getFieldDecorator('products', {
+      {getFieldDecorator('foods', {
         initialValue: [],
       })(<input type="hidden" />)}
 

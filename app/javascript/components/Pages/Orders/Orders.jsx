@@ -13,7 +13,7 @@ export default () => {
 
   const fetchOrders = () => {
     axios.get('/orders.json')
-      .then(result => setOrders(result.data.reverse()))
+      .then(result => setOrders(result.data))
   }
 
   useEffect(fetchOrders, [])

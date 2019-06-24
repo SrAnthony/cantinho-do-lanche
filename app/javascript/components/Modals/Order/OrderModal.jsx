@@ -24,16 +24,16 @@ class OrderModal extends React.Component {
     this.props.form.validateFields((errors, values) => {
       if (errors) return
 
-      if (values.products.length == 0)
-        return message.info('Você deve selecionar ao menos um produto')
+      if (values.foods.length == 0)
+        return message.info('Você deve selecionar ao menos um lanche')
 
       this.setState({ loading: true })
 
-      Promise.all(values.products.map(product => {
+      Promise.all(values.foods.map(food => {
         const data = {
           table: values.table,
           customer_id: values.customer_id,
-          product_id: product,
+          food_id: food,
         }
         return axios.post('/orders', { order: data })
       }))

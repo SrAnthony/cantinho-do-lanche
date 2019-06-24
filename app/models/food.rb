@@ -13,4 +13,9 @@
 #
 
 class Food < ApplicationRecord
+  has_many :orders
+  has_many :foods_products
+  has_many :products, through: :foods_products
+
+  accepts_nested_attributes_for :foods_products, allow_destroy: true
 end
