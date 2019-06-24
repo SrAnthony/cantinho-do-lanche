@@ -5,7 +5,7 @@
 #  id          :bigint           not null, primary key
 #  name        :string(255)
 #  price_cents :integer
-#  stock       :integer
+#  stock       :float(24)
 #  category    :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
