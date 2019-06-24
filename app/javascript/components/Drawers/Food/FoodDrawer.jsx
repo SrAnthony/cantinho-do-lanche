@@ -8,6 +8,8 @@ class FoodDrawer extends React.Component {
     visible: false,
     loading: false,
     editing: false,
+
+    foods_products: [{ id: Math.random() }],
   }
 
   open = id => {
@@ -22,12 +24,34 @@ class FoodDrawer extends React.Component {
     this.props.onUpdate()
   }
 
+  addFoodProduct = () => {
+    const { foods_products } = this.state
+    this.setState({ foods_products: [ ...foods_products, { id: Math.random() } ] })
+  }
+
+  removeFoodProduct = id => {
+    const { foods_products } = this.state
+    const index = foods_products.findIndex(fp => fp.id == id)
+    foods_products[index]._destroy = true
+    this.props.form.setFieldsValue({ [`foods_products_attributes[${id}][_destroy]`]: true })
+    this.setState({ foods_products })
+  }
+
   openWithId = id => {
+    const { setFieldsValue } = this.props.form
     this.setState({ editing: true })
+
     axios.get(`/food/${id}.json`)
       .then(result => {
-        console.log(result.data)
-        this.props.form.setFieldsValue(result.data)
+        this.setState({ foods_products: result.data.foods_products })
+        result.data.foods_products.forEach(f_product => {
+          setFieldsValue({
+            [`foods_products_attributes[${f_product.id}][id]`]: f_product.id,
+            [`foods_products_attributes[${f_product.id}][product_id]`]: f_product.product_id,
+            [`foods_products_attributes[${f_product.id}][quantity]`]: f_product.quantity,
+          })
+        })
+        setFieldsValue(result.data)
       })
   }
 
@@ -71,7 +95,7 @@ class FoodDrawer extends React.Component {
 
   render() {
     const { form } = this.props
-    const { visible, loading, editing } = this.state
+    const { visible, loading, editing, foods_products } = this.state
 
     return (
       <Drawer
@@ -80,7 +104,12 @@ class FoodDrawer extends React.Component {
         width={500}
         onClose={this.close}
       >
-        <FoodForm form={form} />
+        <FoodForm
+          form={form}
+          foods_products={foods_products}
+          addFoodProduct={this.addFoodProduct}
+          removeFoodProduct={this.removeFoodProduct}
+        />
 
         <div className="ant-drawer-actions">
           <Button onClick={this.close} style={{ marginRight: 8 }}>

@@ -1,16 +1,10 @@
-import React, { useState } from 'react'
-import { Form, Input, InputNumber, Row, Col, Table, Button } from 'antd'
+import React from 'react'
+import { Form, Input, InputNumber, Row, Col, Table, Button, Icon } from 'antd'
 import { formatCurrency, numberParser } from 'Utils/formatters'
 import ProductInput from 'Inputs/Product'
 
-export default ({ form }) => {
-  const [products, setProducts] = useState([{ id: Math.random() }])
-
+export default ({ form, foods_products, addFoodProduct, removeFoodProduct }) => {
   const { getFieldDecorator } = form
-
-  const addProduct = () => {
-    setProducts([ ...products, { id: Math.random() } ])
-  }
 
   const products_columns = [{
     title: 'Produto',
@@ -22,10 +16,13 @@ export default ({ form }) => {
         })(
           <Input type="hidden" />
         )}
+        {getFieldDecorator(`foods_products_attributes[${product.id}][_destroy]`)(
+          <Input type="hidden" />
+        )}
         {getFieldDecorator(`foods_products_attributes[${product.id}][product_id]`, {
           initialValue: product.product_id,
         })(
-          <ProductInput />
+          <ProductInput disabled={product._destroy} />
         )}
       </div>
     )
@@ -41,8 +38,18 @@ export default ({ form }) => {
           min={1}
           style={{ width: '100%' }}
           placeholder="Quantidade"
+          disabled={product._destroy}
         />
       )
+    )
+  }, {
+    key: 'actions',
+    fixed: 'right',
+    width: 50,
+    render: (_, product) => (
+      <a onClick={() => removeFoodProduct(product.id)}>
+        <Icon type="delete" />
+      </a>
     )
   }]
 
@@ -92,15 +99,17 @@ export default ({ form }) => {
       <Row gutter={16}>
         <Table
           columns={products_columns}
-          dataSource={products}
+          dataSource={foods_products}
           rowKey={item => item.id}
           pagination={false}
           style={{ margin: '0 -16px' }}
         />
-        <Button type="dashed" style={{ marginTop: 10 }} onClick={addProduct}>
+        <Button type="dashed" style={{ marginTop: 10 }} onClick={addFoodProduct}>
           Adicionar produto
         </Button>
       </Row>
+
+      <div style={{ height: 53 }} />
     </Form>
   )
 }

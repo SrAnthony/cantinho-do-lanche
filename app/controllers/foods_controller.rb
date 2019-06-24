@@ -71,7 +71,7 @@ class FoodsController < ApplicationController
     def food_params
       params.require(:food).permit(
         :name, :price_cents, :category, :points_earn, :points_needed,
-        foods_products_attributes: [ :id, :product_id, :food_id, :quantity ]
+        foods_products_attributes: [ :id, :product_id, :food_id, :quantity, :_destroy ]
       )
     end
 end
