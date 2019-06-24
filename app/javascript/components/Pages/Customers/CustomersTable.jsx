@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Divider, Icon, Popconfirm } from 'antd'
 import moment from 'Utils/moment'
 
-export default ({ data, openDrawer, destroyCustomer }) => {
+export default ({ data, openDrawer, destroyCustomer, loading }) => {
   const columns = [{
     title: 'Nome',
     dataIndex: 'name',
@@ -47,6 +47,7 @@ export default ({ data, openDrawer, destroyCustomer }) => {
     <Table
       columns={columns}
       dataSource={data}
+      loading={loading}
       rowKey={cl => cl.id}
     />
   )

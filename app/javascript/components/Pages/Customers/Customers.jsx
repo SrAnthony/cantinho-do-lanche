@@ -6,12 +6,12 @@ import CustomerDrawer from 'Drawers/Customer'
 
 export default () => {
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const fetchCustomers = () => {
     axios.get('/customers.json')
-      .then(result => {
-        setData(result.data)
-      })
+      .then(result => setData(result.data))
+      .finally(() => setLoading(false))
   }
 
   const destroyCustomer = id => {
@@ -42,6 +42,7 @@ export default () => {
           data={data}
           openDrawer={id => customerDrawerRef.current.open(id)}
           destroyCustomer={destroyCustomer}
+          loading={loading}
         />
       </section>
 

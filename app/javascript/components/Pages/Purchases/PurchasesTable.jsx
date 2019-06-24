@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Divider, Icon, Popconfirm } from 'antd'
 import { formatCurrency } from 'Utils/formatters'
 
-export default ({ data, openDrawer, destroyPurchase }) => {
+export default ({ data, openDrawer, destroyPurchase, loading }) => {
   const columns = [{
     title: 'Produto',
     dataIndex: 'product',
@@ -51,6 +51,7 @@ export default ({ data, openDrawer, destroyPurchase }) => {
     <Table
       columns={columns}
       dataSource={data}
+      loading={loading}
       rowKey={pr => pr.id}
     />
   )

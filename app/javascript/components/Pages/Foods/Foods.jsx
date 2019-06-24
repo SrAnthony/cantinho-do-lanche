@@ -6,12 +6,12 @@ import FoodDrawer from 'Drawers/Food'
 
 export default () => {
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const fetchFoods = () => {
     axios.get('/foods.json')
-      .then(result => {
-        setData(result.data)
-      })
+      .then(result => setData(result.data))
+      .finally(() => setLoading(false))
   }
 
   const destroyFood = id => {
@@ -42,6 +42,7 @@ export default () => {
           data={data}
           openDrawer={id => foodDrawerRef.current.open(id)}
           destroyFood={destroyFood}
+          loading={loading}
         />
       </section>
 

@@ -6,12 +6,12 @@ import ProductDrawer from 'Drawers/Product'
 
 export default () => {
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const fetchProducts = () => {
     axios.get('/products.json')
-      .then(result => {
-        setData(result.data)
-      })
+      .then(result => setData(result.data))
+      .finally(() => setLoading(false))
   }
 
   const destroyProduct = id => {
@@ -42,6 +42,7 @@ export default () => {
           data={data}
           openDrawer={id => productDrawerRef.current.open(id)}
           destroyProduct={destroyProduct}
+          loading={loading}
         />
       </section>
 

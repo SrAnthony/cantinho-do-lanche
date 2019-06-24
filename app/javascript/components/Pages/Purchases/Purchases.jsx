@@ -6,12 +6,12 @@ import PurchaseDrawer from 'Drawers/Purchase'
 
 export default () => {
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const fetchPurchases = () => {
     axios.get('/purchases.json')
-      .then(result => {
-        setData(result.data)
-      })
+      .then(result => setData(result.data))
+      .finally(() => setLoading(false))
   }
 
   const destroyPurchase = id => {
@@ -42,6 +42,7 @@ export default () => {
           data={data}
           openDrawer={id => purchaseDrawerRef.current.open(id)}
           destroyPurchase={destroyPurchase}
+          loading={loading}
         />
       </section>
 
