@@ -28,9 +28,16 @@ export default ({ form }) => {
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="Estoque atual">
-            {getFieldDecorator('stock')(
-              <Input placeholder="Informe o estoque" />
+          <Form.Item label="Pontos ganhos">
+            {getFieldDecorator('points_earn')(
+              <Input placeholder="Informe os pontos" />
+            )}
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item label="Pontos necessários">
+            {getFieldDecorator('points_needed')(
+              <Input placeholder="Informe os pontos" />
             )}
           </Form.Item>
         </Col>

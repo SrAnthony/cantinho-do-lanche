@@ -35,6 +35,11 @@ const App = () => {
                   Clientes
                 </Link>
               </Menu.Item>
+              <Menu.Item key="/foods">
+                <Link to="/foods">
+                  Lanches
+                </Link>
+              </Menu.Item>
               <Menu.Item key="/products">
                 <Link to="/products">
                   Produtos
@@ -81,4 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
     <App />,
     document.getElementById('app-home'),
   )
+  setTimeout(() => {
+    document.getElementById('loader').style.opacity = '0'
+    setTimeout(() => {
+      document.getElementById('loader').style.display = 'none'
+    }, 300)
+  }, 1000)
 })
